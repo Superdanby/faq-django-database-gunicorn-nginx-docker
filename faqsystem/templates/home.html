@@ -1,0 +1,38 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% load static %}
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+<script src="{% static 'script.js' %}"></script>
+
+<div class="admin"><a href="{% url 'admin:index' %}">管理</a></div>
+<h1 class="title"><a href="{% url 'faqsystem:home' %}">常見問題</a></h1>
+
+<form class="search-bar" method="GET" action="{% url 'faqsystem:home' %}">
+	<input type="text" name="query" value="{{request.GET.query}}">
+	<input type="submit" value="Go!">
+</form>
+
+{% if faq_list %}
+<div class="flex-container">
+    {% for faq in faq_list %}
+        <div id="{{ forloop.counter }}" onclick="show({{ forloop.counter }})">
+            <div class="question">{{ faq.question_text }}</div>
+            <div class="answer">
+                {{ faq.answer_text }}
+            </div>
+            {% if faq.images_set.all %}
+            {% for image in faq.images_set.all %}
+            <img class="ansimg" src="{{ image.img.url }}" />
+            {% endfor %}
+            {% endif %}
+            {% if faq.files_set.all %}
+            {% for file in faq.files_set.all %}
+            <a class="ansfile" href="{{file.f.url}}" target="_blank" onclick="event.stopPropagation()">{{file.filename}}</a>
+            {% endfor %}
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>
+{% else %}
+    <p>No faqs are available.</p>
+{% endif %}

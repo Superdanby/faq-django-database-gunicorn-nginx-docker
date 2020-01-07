@@ -1,0 +1,102 @@
+body {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+}
+
+.admin {
+    float: right;
+}
+
+.admin > a {
+    background: #f0fff0;
+    border: none;
+    cursor: pointer;
+    padding:1vw 2vw;
+    text-align: center;
+    text-decoration: none;
+    color: #778899;
+}
+
+.title {
+    text-align: center;
+}
+
+.title > a {
+	text-decoration: none;
+    color: lightslategray;
+}
+
+.search-bar {
+    text-align: center;
+}
+
+input[type=text] {
+    width: 30%;
+    padding:5px;
+    border:2px solid #ccc;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+input[type=text]:focus {
+    border-color:#333;
+}
+
+input[type=submit] {
+    padding:5px 15px;
+    background:#ccc;
+    border:0 none;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.flex-container {
+  display: flex;
+  min-height: -webkit-fill-available;
+  flex-direction: column;
+  background-color: gainsboro;
+}
+
+.flex-container > div {
+  background-color: aliceblue;
+  width: 70%;
+  margin: 0.5vw;
+  align-self: center;
+  text-align: center;
+  cursor: pointer;
+}
+
+.question {
+    padding: 0.5vw;
+    font-size: 30px;
+    font-weight: bold;
+    overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 3; /* number of lines to show */
+	-webkit-box-orient: vertical;
+}
+
+.answer {
+    background-color: honeydew;
+    padding: 1vw;
+    font-size: 20px;
+	display: none;
+    margin: inherit;
+}
+
+.ansimg {
+    display: none;
+    max-width: 95%;
+    margin: inherit;
+}
+
+.ansfile {
+    background: antiquewhite;
+    color: darkcyan;
+    margin: inherit;
+    display: none;
+    text-decoration: none;
+}
