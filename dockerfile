@@ -1,6 +1,6 @@
 FROM centos:8
 
-RUN yum install python3 libpq-devel
+RUN yum -y install python3 libpq-devel git
 RUN python3 -m venv venv && source venv/bin/activate
 
 ENV PYTHONDONTWRITEBYTECODE 1

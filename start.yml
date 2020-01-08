@@ -3,7 +3,9 @@ version: '3.7'
 services:
 
   web:
-    dockerfile: dockerfile
+    build:
+      context: https://github.com/Superdanby/faq-django-postgres-gunicorn-nginx.git
+      dockerfile: dockerfile
     restart: always
     working_dir: /faq-django-postgres-gunicorn-nginx
     command: python manage.py makemigrations && python manage.py migrate && gunicorn mydjango.wsgi -b 0.0.0.0:8181
@@ -26,7 +28,9 @@ services:
       - "./pgdata:/var/lib/postgresql/data:Z"
 
   nginx:
-    dockerfile: nginx.dockerfile
+    build:
+      context: https://github.com/Superdanby/faq-django-postgres-gunicorn-nginx.git
+      dockerfile: nginx.dockerfile
     volumes:
       - ./media:/media
       - ./static:/static
