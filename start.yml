@@ -8,7 +8,7 @@ services:
       dockerfile: dockerfile
     restart: always
     working_dir: /faq-django-postgres-gunicorn-nginx
-    command: python3 manage.py makemigrations && python3 manage.py migrate && gunicorn faq.wsgi -b 0.0.0.0:8181
+    command: bash -c "python3 manage.py makemigrations && python3 manage.py migrate && gunicorn faq.wsgi -b 0.0.0.0:8181"
     volumes:
       - ./media:/media
       - ./static:/static
@@ -23,7 +23,7 @@ services:
     env_file:
         - .env
     ports:
-      - "8181:5432"
+      - "8111:5432"
     volumes:
       - "./pgdata:/var/lib/postgresql/data:Z"
 
@@ -34,6 +34,7 @@ services:
     volumes:
       - ./media:/media
       - ./static:/static
+    restart: always
     ports:
       - 80:80
     depends_on:
