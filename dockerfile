@@ -1,6 +1,6 @@
 FROM centos:8
 
-RUN yum -y install python3 libpq-devel git gcc-devel
+RUN yum -y install python3-devel libpq-devel git gcc
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
