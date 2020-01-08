@@ -1,12 +1,11 @@
 FROM centos:8
 
-RUN yum -y install python3 libpq-devel git
-RUN python3 -m venv venv && source venv/bin/activate
+RUN yum -y install python3 libpq-devel git gcc-devel
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 RUN git clone https://github.com/Superdanby/faq-django-postgres-gunicorn-nginx.git
 WORKDIR /faq-django-postgres-gunicorn-nginx
-RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
+RUN pip3 install --upgrade pip
+RUN pip3 install -r requirements.txt
