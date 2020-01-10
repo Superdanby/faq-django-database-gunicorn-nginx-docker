@@ -73,18 +73,31 @@ WSGI_APPLICATION = 'faq.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('POSTGRES_DB', 'faqs'),
-        'USER': os.getenv('POSTGRES_USER', 'yaaaaaaaaaaaaa!'),
-        'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'yaaaaaaaaaaaaa!'),
-        'HOST': os.getenv('POSTGRES_HOST', '127.0.0.1'),
-        'PORT': os.getenv('POSTGRES_PORT', '5432'),
+DB_TYPE = os.getenv("DB_TYPE", '')
+if DB_TYPE == 'mysql' or DB_TYPE == 'mariadb':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': os.getenv('MYSQL_DATABASE', 'faqs'),
+            'USER': 'root',
+            'PASSWORD': os.getenv('MYSQL_ROOT_PASSWORD', 'yaaaaaaaaaaaaa!'),
+            'HOST': os.getenv('HOST', '127.0.0.1'),
+            'PORT': os.getenv('PORT', '3306'),
+        }
     }
-}
-
+elif DB_TYPE == 'postgres' or DB_TYPE == 'postgresql':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.getenv('POSTGRES_DB', 'faqs'),
+            'USER': os.getenv('POSTGRES_USER', 'yaaaaaaaaaaaaa!'),
+            'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'yaaaaaaaaaaaaa!'),
+            'HOST': os.getenv('HOST', '127.0.0.1'),
+            'PORT': os.getenv('PORT', '5432'),
+        }
+    }
+else:
+    raise ValueError('DB_TYPE not supported, either add a new database backend or use DB_TYPE=mariadb, DB_TYPE=mysql, or DB_TYPE=postgres')
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators

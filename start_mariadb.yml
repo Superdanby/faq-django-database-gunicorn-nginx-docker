@@ -4,10 +4,10 @@ services:
 
   web:
     build:
-      context: https://github.com/Superdanby/faq-django-postgres-gunicorn-nginx.git
+      context: https://github.com/Superdanby/faq-django-database-gunicorn-nginx-docker.git
       dockerfile: dockerfile
     restart: always
-    working_dir: /faq-django-postgres-gunicorn-nginx
+    working_dir: /faq-django-database-gunicorn-nginx-docker
     command: bash -c "python3 manage.py makemigrations && python3 manage.py migrate && cat .createsuperuser | envsubst | python3 manage.py shell && python3 manage.py collectstatic --no-input && gunicorn faq.wsgi -b 0.0.0.0:8181"
     volumes:
       - ./media:/media
@@ -18,16 +18,16 @@ services:
       - db
 
   db:
-    image: postgres
+    image: mariadb
     restart: always
     env_file:
         - .env
     volumes:
-      - "./pgdata:/var/lib/postgresql/data"
+      - "./mariadata:/var/lib/mysql"
 
   nginx:
     build:
-      context: https://github.com/Superdanby/faq-django-postgres-gunicorn-nginx.git
+      context: https://github.com/Superdanby/faq-django-database-gunicorn-nginx-docker.git
       dockerfile: nginx.dockerfile
     volumes:
       - ./media:/media

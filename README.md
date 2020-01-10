@@ -1,4 +1,4 @@
-# faq-django-postgres-gunicorn-nginx
+# faq-django-database-gunicorn-nginx-docker
 
 A simple FAQ system.
 
@@ -20,7 +20,7 @@ A simple FAQ system.
 ## Usage
 
 1. Download `start.yml` and `.env.exmaple`, and put them in the same directory
-2. [Edit `.env.exmaple`](https://github.com/Superdanby/faq-django-postgres-gunicorn-nginx#env) and rename it to `.env`
+2. [Edit `.env.exmaple`](https://github.com/Superdanby/faq-django-database-gunicorn-nginx-docker#env) and rename it to `.env`
 3. `docker-compose -f start.yml up -d`
 4. Go to [localhost](localhost) and it should be running
 
@@ -36,14 +36,17 @@ Update to the newest version requires rebuilding the images:
 
 | Variable | Default value | Description | Containers using the variable |
 | -------- | ------------- | ----------- | ------------------- |
+| `DB_TYPE` | '' | Supported values are `mariadb`(`mysql`), `postgres`(`postgresql`), should be specified even in development | `web` |
 | `DEBUG` | `0` | Production: `0` / Development: `1` | `web` |
 | `SECRET_KEY` | `yaaaaaaaaaaaaa!` | Change this to a hard-to-guess random string | `web` |
-| `DJANGO_ALLOWED_HOSTS` | `localhost 127.0.0.1 [::1]` | Allowed source IP, use the default value in production | `web` |
+| `DJANGO_ALLOWED_HOSTS` | `localhost 127.0.0.1 [::1]` | the IPs/domain names that this Django site can be served | `web` |
 | `DJANGO_SUPER_USER` | `yaaaaaaaaaaaaa!` | Default admin page username | `web` |
 | `DJANGO_SUPER_PASSWORD` | `yaaaaaaaaaaaaa!` | Default admin page password | `web` |
 | `DJANGO_SUPER_EMAIL` |  `yaaaaa@yaaa.yaa` | Email of the admin user | `web` |
-| `POSTGRES_HOST` | `db` | Domain name or IP of Postgres database | `web` |
-| `POSTGRES_PORT` | `5432` | Port of Postgres database | `web` |
+| `HOST` | `db` | Domain name or IP of the database | `web` |
+| `PORT` | `` | Port of the database(`postgres`: `5432`, `mariadb`: `3306`) | `web` |
+| `MYSQL_ROOT_PASSWORD` | `yaaaaaaaaaaaaa!` | Mariadb `root` password | `web` & `db` |
+| `MYSQL_DATABASE` | `faqs` | Mysql default database | `web` & `db` |
 | `POSTGRES_USER` | `yaaaaaaaaaaaaa!` | Postgres super account username | `web` & `db` |
 | `POSTGRES_PASSWORD` | `yaaaaaaaaaaaaa!` | Postgres super account password | `web` & `db` |
 | `POSTGRES_DB` | `faqs` | Postgres default database | `web` & `db` |
@@ -51,25 +54,33 @@ Update to the newest version requires rebuilding the images:
 ## Django Development Instructions
 
 1. Clone this repository
-2. In `start.yml`, under `db:`, add:
+2. In `start_[database].yml`, under `db:`, add:
     ```yaml=
     db:
       ...
+      # postgres
       ports:
         - 5432:5432
       ...
+
+    db:
+      ...
+      # mariadb
+      ports:
+        - 3306:3306
+      ...
     ```
-2. `docker-compose -f start.yml up -d db`
-3. `python3 manage.py runserver`
-4. If you need [static files and media files to be served](https://docs.djangoproject.com/en/3.0/howto/static-files/#serving-files-uploaded-by-a-user-during-development), add `+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)` after `urlpatterns` in `faq/urls.py`
+3. `docker-compose -f start.yml up -d db`
+4. `DB_TYPE=[database] PORT=[port] python3 manage.py runserver`
+5. If you need [static files and media files to be served](https://docs.djangoproject.com/en/3.0/howto/static-files/#serving-files-uploaded-by-a-user-during-development), add `+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)` after `urlpatterns` in `faq/urls.py`
 
 ## Fork Instructions
 
 1. Fork this repository
 2. Clone your repository
 3. Change the upstream urls:
-   - In `start.yml`: 2 urls in the value field of `context`
+   - In `start_[database].yml`: 2 urls in the value field of `context`
    - In `dockerfile`: 1 url after `RUN git clone`
    - In `nginx.dockerfile`: 1 url after `RUN curl`
 4. Commit and push your changes
-5. Remember to push your changes to the upstream repository and [update](https://github.com/Superdanby/faq-django-postgres-gunicorn-nginx#update) it before starting the services.
+5. Remember to push your changes to the upstream repository and [update](https://github.com/Superdanby/faq-django-database-gunicorn-nginx-docker#update) it before starting the services.
