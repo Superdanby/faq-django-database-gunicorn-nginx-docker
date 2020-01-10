@@ -84,3 +84,10 @@ Update to the newest version requires rebuilding the images:
    - In `nginx.dockerfile`: 1 url after `RUN curl`
 4. Commit and push your changes
 5. Remember to push your changes to the upstream repository and [update](https://github.com/Superdanby/faq-django-database-gunicorn-nginx-docker#update) it before starting the services.
+
+## Windows Issues and Workarounds
+
+1. [`postgres` docker image can't specify host volumes](https://github.com/docker/for-win/issues/445)
+   - Use `mariadb` instead
+2. [`mariadb` can't start with InnoDB: auto-extending data file ./ibdata1 is of a different size 0 pages](https://github.com/docker-library/mariadb/issues/95#issuecomment-407839431)
+   - Add `--innodb-flush-method=fsync` to the `command` value under `db` in `start_mariadb.yml`
