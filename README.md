@@ -2,6 +2,8 @@
 
 A simple FAQ system.
 
+- [Windows Setup Instructions(Traditional Chinese)](https://hackmd.io/@Superdanby/BJicDitl8)
+
 ## Prerequisite
 
 - `docker-compose`: version 3
