@@ -16,9 +16,9 @@
 <div class="flex-container">
     {% for faq in faq_list %}
         <div id="{{ forloop.counter }}" onclick="show({{ forloop.counter }})">
-            <div class="question">{{ faq.question_text }}</div>
+            <div class="question">{{ faq.question_text|urlize }}</div>
             <div class="answer">
-                {{ faq.answer_text }}
+                {{ faq.answer_text|urlize }}
             </div>
             {% if faq.images_set.all %}
             {% for image in faq.images_set.all %}
@@ -27,7 +27,7 @@
             {% endif %}
             {% if faq.files_set.all %}
             {% for file in faq.files_set.all %}
-            <a class="ansfile" href="{{file.f.url}}" target="_blank" onclick="event.stopPropagation()">{{file.filename}}</a>
+            <a class="ansfile" href="{{file.f.url}}" target="_blank" onclick="event.stopPropagation()">{{ file.filename }}</a>
             {% endfor %}
             {% endif %}
         </div>
