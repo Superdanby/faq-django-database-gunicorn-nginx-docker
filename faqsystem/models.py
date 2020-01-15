@@ -1,9 +1,11 @@
 from django.db import models
+from django.conf import settings
 
 import os
 
 # Create your models here.
 class FAQ(models.Model):
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.SET_NULL)
     question_text = models.CharField(max_length=10000)
     answer_text = models.CharField(max_length=10000)
 
