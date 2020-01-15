@@ -4,9 +4,7 @@ services:
 
   web:
     build:
-      context: https://github.com/Superdanby/faq-django-database-gunicorn-nginx-docker
-
-      .git
+      context: https://github.com/Superdanby/faq-django-database-gunicorn-nginx-docker.git
       dockerfile: dockerfile
     restart: always
     working_dir: /faq-django-database-gunicorn-nginx-docker
@@ -32,9 +30,7 @@ services:
 
   nginx:
     build:
-      context: https://github.com/Superdanby/faq-django-database-gunicorn-nginx-docker
-
-      .git
+      context: https://github.com/Superdanby/faq-django-database-gunicorn-nginx-docker.git
       dockerfile: nginx.dockerfile
     volumes:
       - ./media:/media
