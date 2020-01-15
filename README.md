@@ -45,7 +45,7 @@ Update to the newest version requires rebuilding the images:
 | `DJANGO_SUPER_USER` | `yaaaaaaaaaaaaa!` | Default admin page username | `web` |
 | `DJANGO_SUPER_PASSWORD` | `yaaaaaaaaaaaaa!` | Default admin page password | `web` |
 | `DJANGO_SUPER_EMAIL` |  `yaaaaa@yaaa.yaa` | Email of the admin user | `web` |
-| `HOST` | `db` | Domain name or IP of the database | `web` |
+| `HOST` | `db` | Domain name or IP of the database, use `127.0.0.1` instead of `localhost` in development | `web` |
 | `PORT` | `` | Port of the database(`postgres`: `5432`, `mariadb`: `3306`) | `web` |
 | `MYSQL_ROOT_PASSWORD` | `yaaaaaaaaaaaaa!` | Mariadb `root` password | `web` & `db` |
 | `MYSQL_DATABASE` | `faqs` | Mysql default database | `web` & `db` |
@@ -56,11 +56,15 @@ Update to the newest version requires rebuilding the images:
 ## Django Development Instructions
 
 1. Clone this repository
-2. In `start_[database].yml`, under `db:`, add:
+2. Create your [`.env.dev`](https://github.com/Superdanby/faq-django-database-gunicorn-nginx-docker#env)
+3. `source .env.dev && export $(cut -d = -f 1 .env.dev)`
+4. In `start_[database].yml`, under `db:`, edit:
     ```yaml=
     db:
       ...
       # postgres
+      env_file:
+        - .env.dev
       ports:
         - 5432:5432
       ...
@@ -68,13 +72,15 @@ Update to the newest version requires rebuilding the images:
     db:
       ...
       # mariadb
+      env_file:
+        - .env.dev
       ports:
         - 3306:3306
       ...
     ```
-3. `docker-compose -f start.yml up -d db`
-4. `DB_TYPE=[database] PORT=[port] python3 manage.py runserver`
-5. If you need [static files and media files to be served](https://docs.djangoproject.com/en/3.0/howto/static-files/#serving-files-uploaded-by-a-user-during-development), add `+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)` after `urlpatterns` in `faq/urls.py`
+5. `docker-compose -f start_[database].yml up -d db`
+6. `python3 manage.py runserver`
+7. If you need [static files and media files to be served](https://docs.djangoproject.com/en/3.0/howto/static-files/#serving-files-uploaded-by-a-user-during-development), add `+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)` after `urlpatterns` in `faq/urls.py`
 
 ## Fork Instructions
 
