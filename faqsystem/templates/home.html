@@ -15,8 +15,8 @@
 {% if faq_list %}
 <div class="flex-container">
     {% for faq in faq_list %}
-        <div id="{{ forloop.counter }}" onclick="show({{ forloop.counter }})">
-            <div class="question">{{ faq.question_text|urlize }}</div>
+        <div id="{{ forloop.counter }}">
+            <div class="question" onclick="show({{ forloop.counter }})">{{ faq.question_text|urlize }}</div>
             <div class="answer">
                 {{ faq.answer_text|urlize }}
             </div>

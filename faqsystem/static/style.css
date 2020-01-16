@@ -65,10 +65,10 @@ input[type=submit] {
   margin: 0.5vw;
   align-self: center;
   text-align: center;
-  cursor: pointer;
 }
 
 .question {
+    cursor: pointer;
     padding: 0.5vw;
     font-size: 30px;
     font-weight: bold;
