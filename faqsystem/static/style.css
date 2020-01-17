@@ -72,11 +72,29 @@ input[type=submit] {
     padding: 0.5vw;
     font-size: 30px;
     font-weight: bold;
+    position: relative;
     overflow: hidden;
 	text-overflow: ellipsis;
 	display: -webkit-box;
 	-webkit-line-clamp: 3; /* number of lines to show */
 	-webkit-box-orient: vertical;
+}
+
+.author {
+    /* display: none; */
+    opacity: 0;
+    position: absolute;
+    font-size: 16;
+    color: darkseagreen;
+    right: 1vw;
+}
+
+.entry:hover .author {
+    /* display: unset; */
+    -webkit-transition: opacity 0.5s ease-in;
+    -moz-transition: opacity 0.5s ease-in;
+    -o-transition: opacity 0.5s ease-in;
+    opacity: 1;
 }
 
 .answer {
