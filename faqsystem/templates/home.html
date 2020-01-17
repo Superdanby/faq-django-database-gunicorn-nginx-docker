@@ -17,9 +17,7 @@
     {% for faq in faq_list %}
         <div class="entry" id="{{ forloop.counter }}">
             <div class="question" onclick="show({{ forloop.counter }})">{{ faq.question_text|urlize }}<span class="author">{{ faq.author }}</span></div>
-            <div class="answer">
-                {{ faq.answer_text|urlize }}
-            </div>
+            <div class="answer">{{ faq.answer_text|urlize }}</div>
             {% if faq.images_set.all %}
             {% for image in faq.images_set.all %}
             <img class="ansimg" src="{{ image.img.url }}" />
@@ -35,6 +33,6 @@
 </div>
 {% else %}
 <div class="not-found">
-    <span>え？？？なに？？？找不到欸QAQQQ</span>    
+    <span>え？？？なに？？？找不到欸QAQQQ</span>
 </div>
 {% endif %}

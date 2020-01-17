@@ -7,7 +7,7 @@ import os
 class FAQ(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.SET_NULL)
     question_text = models.CharField(max_length=10000)
-    answer_text = models.CharField(max_length=10000)
+    answer_text = models.TextField()
 
     def __str__(self):
         return self.question_text + self.answer_text
