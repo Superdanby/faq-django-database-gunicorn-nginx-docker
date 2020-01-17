@@ -120,3 +120,19 @@ input[type=submit] {
     display: none;
     text-decoration: none;
 }
+
+.not-found {
+    background: lavenderblush;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    text-align: center;
+}
+
+.not-found > span {
+    position: relative;
+    font-size: xxx-large;
+    font-family: monospace;
+    font-weight: bold;
+    top: 30%;
+}
