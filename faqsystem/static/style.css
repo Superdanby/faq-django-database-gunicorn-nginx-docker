@@ -1,11 +1,13 @@
 body {
+    position: relative;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: auto;
 }
 
 .admin {
-    float: right;
+    position: absolute;
+    right: 0;
 }
 
 .admin > a {
