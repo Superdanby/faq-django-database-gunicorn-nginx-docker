@@ -4,10 +4,18 @@ from django.conf import settings
 import os
 
 # Create your models here.
+class NonStrippingTextField(models.TextField):
+    """A TextField that does not strip whitespace at the beginning/end of
+    it's value.  Might be important for markup/code."""
+
+    def formfield(self, **kwargs):
+        kwargs['strip'] = False
+        return super(NonStrippingTextField, self).formfield(**kwargs)
+
 class FAQ(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.SET_NULL)
     question_text = models.CharField(max_length=10000)
-    answer_text = models.TextField()
+    answer_text = NonStrippingTextField()
 
     def __str__(self):
         return self.question_text + self.answer_text
