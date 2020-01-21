@@ -40,7 +40,7 @@ function update(id)
         {
             if(xmlHttp.readyState == 4 && xmlHttp.status == 200)
             {
-                document.getElementById("clicks-" + id).innerHTML = xmlHttp.responseText + "🔍";
+                document.getElementById("clicks-" + id).innerHTML = xmlHttp.responseText + "<i class=\"material-icons md-14\">search</i>";
             }
         }
         xmlHttp.open("post", window.location.href);

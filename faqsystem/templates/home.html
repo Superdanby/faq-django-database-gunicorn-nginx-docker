@@ -1,5 +1,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 {% load static %}
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
 <script src="{% static 'script.js' %}"></script>
@@ -20,7 +21,7 @@
             {% csrf_token %}
                 <input type="submit" name="faq_id" value="{{ faq.id }}">
             </form>
-            <div class="question" onclick="show({{ forloop.counter }}); update({{ forloop.counter }})">{{ faq.question_text|urlize }}<span class="author">{{ faq.author }}</span><span class="clicks" id="clicks-{{ forloop.counter }}">{{faq.clicks}}🔍</span></div>
+            <div class="question" onclick="show({{ forloop.counter }}); update({{ forloop.counter }})">{{ faq.question_text|urlize }}<span class="author">{{ faq.author }}</span><span class="clicks" id="clicks-{{ forloop.counter }}">{{faq.clicks}}<i class="material-icons md-14">search</i></span></div>
             <div class="answer">{{ faq.answer_text|urlize }}</div>
             {% if faq.images_set.all %}
             {% for image in faq.images_set.all %}
