@@ -80,7 +80,7 @@ Update to the newest version requires rebuilding the images:
     ```
 5. `docker-compose -f start_[database].yml up -d db`
 6. `python3 manage.py runserver`
-7. If you need [static files and media files to be served](https://docs.djangoproject.com/en/3.0/howto/static-files/#serving-files-uploaded-by-a-user-during-development), add `+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)` after `urlpatterns` in `faq/urls.py`
+7. If you need [static files and media files to be served](https://docs.djangoproject.com/en/3.0/howto/static-files/#serving-files-uploaded-by-a-user-during-development), add `+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)` after `urlpatterns` in `faq/urls.py`, and change `STATIC_ROOT` & `MEDIA_ROOT` in `faq/settings.py` to somewhere you have permission.
 
 ## Fork Instructions
 
