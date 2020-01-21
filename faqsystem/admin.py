@@ -16,7 +16,7 @@ class FilesInline(admin.StackedInline):
 
 class FAQAdmin(admin.ModelAdmin):
     inlines = [ImagesInline, FilesInline]
-    exclude = ['author']
+    exclude = ['author', 'clicks']
     list_display = ('question_text', 'answer_text', 'author')
 
     def delete_queryset(self, request, queryset):

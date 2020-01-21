@@ -23,3 +23,29 @@ function show(id) {
         }
     }
 }
+
+function update(id)
+{
+    if (!array[id])
+    {
+        array[id] = true;
+
+        var formData = new FormData();
+        for(element of document.getElementById("clicks-form-" + id))
+        {
+            formData.append(element.name, element.value);
+        }
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function()
+        {
+            if(xmlHttp.readyState == 4 && xmlHttp.status == 200)
+            {
+                document.getElementById("clicks-" + id).innerHTML = xmlHttp.responseText + "🔍";
+            }
+        }
+        xmlHttp.open("post", window.location.href);
+        xmlHttp.send(formData);
+    }
+}
+
+var array = [];

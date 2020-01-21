@@ -84,20 +84,34 @@ input[type=submit] {
 }
 
 .author {
-    /* display: none; */
     opacity: 0;
     position: absolute;
-    font-size: 16px;
+    font-size: 14px;
     color: darkseagreen;
-    right: 1vw;
+    background-color: aliceblue;
+    top: 0;
+    right: 0.5vw;
 }
 
-.entry:hover .author {
-    /* display: unset; */
+.clicks {
+    opacity: 0;
+    position: absolute;
+    font-size: 14px;
+    color: burlywood;
+    background-color: aliceblue;
+    bottom: 0;
+    right: 0.25vw;
+}
+
+.entry:hover .author, .entry:hover .clicks {
     -webkit-transition: opacity 0.5s ease-in;
     -moz-transition: opacity 0.5s ease-in;
     -o-transition: opacity 0.5s ease-in;
     opacity: 1;
+}
+
+.clicks-form {
+    display: none;
 }
 
 .answer {

@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
@@ -51,4 +52,13 @@ class FAQView(generic.ListView):
             #     TrigramSimilarity('answer_text', query)
             # )).filter(similarity__gte=0.1).order_by('-similarity')
 
-        return FAQ.objects.all()
+        return FAQ.objects.order_by('-clicks')
+
+    def post(self, request, *args, **kwargs):
+        faq = get_object_or_404(FAQ, pk=request.POST['faq_id'])
+        faq.clicks += 1
+        faq.save()
+        if faq.clicks < 0:
+            faq.clicks -= 1
+            faq.save()
+        return HttpResponse(faq.clicks)
