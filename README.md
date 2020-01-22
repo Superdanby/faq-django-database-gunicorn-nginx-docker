@@ -52,6 +52,13 @@ Update to the newest version requires rebuilding the images:
 | `POSTGRES_USER` | `yaaaaaaaaaaaaa!` | Postgres super account username | `web` & `db` |
 | `POSTGRES_PASSWORD` | `yaaaaaaaaaaaaa!` | Postgres super account password | `web` & `db` |
 | `POSTGRES_DB` | `faqs` | Postgres default database | `web` & `db` |
+| `FORCE_GEN_CERT` | `false` | set to `true` to force regenerate SSL certificate | `nginx` |
+| `C` | | 2-digit country code, arguments for generating SSL certificate | `nginx` |
+| `ST` | | state, arguments for generating SSL certificate | `nginx` |
+| `L` | | location(city), arguments for generating SSL certificate | `nginx` |
+| `O` | | organization, arguments for generating SSL certificate | `nginx` |
+| `OU` | | organization unit(division), arguments for generating SSL certificate | `nginx` |
+| `CN` | | common name(FQDN/IP), arguments for generating SSL certificate | `nginx` |
 
 ## Django Development Instructions
 

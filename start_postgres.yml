@@ -10,8 +10,8 @@ services:
     working_dir: /faq-django-database-gunicorn-nginx-docker
     command: bash -c "python3 manage.py makemigrations && python3 manage.py migrate && cat .createsuperuser | envsubst | python3 manage.py shell && python3 manage.py collectstatic --no-input && gunicorn faq.wsgi -b 0.0.0.0:8181"
     volumes:
-      - ./media:/media
-      - ./static:/static
+      - ./data/media:/media
+      - ./data/static:/static
     env_file:
         - .env
     depends_on:
@@ -23,17 +23,22 @@ services:
     env_file:
         - .env
     volumes:
-      - "./pgdata:/var/lib/postgresql/data"
+      - "./data/pgdata:/var/lib/postgresql/data"
 
   nginx:
     build:
       context: https://github.com/Superdanby/faq-django-database-gunicorn-nginx-docker.git
       dockerfile: nginx.dockerfile
+    command: /ssl.sh
+    env_file:
+        - .env
     volumes:
-      - ./media:/media
-      - ./static:/static
+      - ./data/media:/media
+      - ./data/static:/static
+      - ./data/ssl:/ssl
     restart: always
     ports:
       - 80:80
+      - 443:443
     depends_on:
       - web
