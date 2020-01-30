@@ -53,12 +53,13 @@ Update to the newest version requires rebuilding the images:
 | `POSTGRES_PASSWORD` | `yaaaaaaaaaaaaa!` | Postgres super account password | `web` & `db` |
 | `POSTGRES_DB` | `faqs` | Postgres default database | `web` & `db` |
 | `FORCE_GEN_CERT` | `false` | set to `true` to force regenerate SSL certificate | `nginx` |
-| `C` | | 2-digit country code, arguments for generating SSL certificate | `nginx` |
-| `ST` | | state, arguments for generating SSL certificate | `nginx` |
-| `L` | | location(city), arguments for generating SSL certificate | `nginx` |
-| `O` | | organization, arguments for generating SSL certificate | `nginx` |
-| `OU` | | organization unit(division), arguments for generating SSL certificate | `nginx` |
-| `CN` | | common name(FQDN/IP), arguments for generating SSL certificate | `nginx` |
+| `C` | | 2-digit country code, arguments for generating SSL certificate(optional) | `nginx` |
+| `ST` | | state, arguments for generating SSL certificate(optional) | `nginx` |
+| `L` | | location(city), arguments for generating SSL certificate(optional) | `nginx` |
+| `O` | | organization, arguments for generating SSL certificate(optional) | `nginx` |
+| `OU` | | organization unit(division), arguments for generating SSL certificate(optional) | `nginx` |
+| `CN` | | common name(FQDN/IP), e.g. `www.example.com` / `0.0.0.0`, arguments for generating SSL certificate | `nginx` |
+| `SAN` | | subject alternative name(DNS:FQDN/IP:IP), e.g. `DNS:www.exmple.com` / `IP:0.0.0.0`, arguments for generating SSL certificate | `nginx` |
 
 ## Django Development Instructions
 

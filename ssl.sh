@@ -4,7 +4,7 @@ if [[ -f /ssl/selfsigned.key && -f /ssl/selfsigned.pem && -f /ssl/dhparam.pem &&
     cp /ssl/selfsigned.pem /etc/ssl/certs/selfsigned.pem
     cp /ssl/dhparam.pem /etc/nginx/dhparam.pem
 else
-    openssl req -x509 -nodes -days 7300 -newkey rsa:4096 -keyout /etc/ssl/private/selfsigned.key -subj "/C=${C}/ST=${ST}/L=${L}/O=${O}/OU=${OU}/CN=${CN}" -out /etc/ssl/certs/selfsigned.pem
+    openssl req -x509 -nodes -days 7300 -newkey rsa:4096 -keyout /etc/ssl/private/selfsigned.key -subj "/C=${C}/ST=${ST}/L=${L}/O=${O}/OU=${OU}/CN=${CN}/subjectAltName=${SAN}" -out /etc/ssl/certs/selfsigned.pem
     openssl dhparam -out /etc/nginx/dhparam.pem 4096
     cp /etc/ssl/private/selfsigned.key /ssl/selfsigned.key
     cp /etc/ssl/certs/selfsigned.pem /ssl/selfsigned.pem
