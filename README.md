@@ -52,6 +52,7 @@ Update to the newest version requires rebuilding the images:
 | `POSTGRES_USER` | `yaaaaaaaaaaaaa!` | Postgres super account username | `web` & `db` |
 | `POSTGRES_PASSWORD` | `yaaaaaaaaaaaaa!` | Postgres super account password | `web` & `db` |
 | `POSTGRES_DB` | `faqs` | Postgres default database | `web` & `db` |
+| `THREADS` | `auto` | [valid values are `auto` or numbers](http://nginx.org/en/docs/ngx_core_module.html#worker_connections), threads available for `nginx` | `nginx` |
 | `FORCE_GEN_CERT` | `false` | set to `true` to force regenerate SSL certificate | `nginx` |
 | `C` | | 2-digit country code, arguments for generating SSL certificate(optional) | `nginx` |
 | `ST` | | state, arguments for generating SSL certificate(optional) | `nginx` |
