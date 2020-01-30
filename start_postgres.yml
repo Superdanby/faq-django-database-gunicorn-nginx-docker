@@ -29,7 +29,7 @@ services:
     build:
       context: https://github.com/Superdanby/faq-django-database-gunicorn-nginx-docker.git
       dockerfile: nginx.dockerfile
-    command: sed 's/^\(worker_processes[[:space:]]\)[^;]*/\1'"$THREADS"'/'; /ssl.sh
+    command: bash -c "sed -i 's/^\(worker_processes[[:space:]]\)[^;]*/\1'\"$THREADS\"'/' /etc/nginx/nginx.conf; /ssl.sh"
     env_file:
         - .env
     volumes:
