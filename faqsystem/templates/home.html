@@ -6,7 +6,7 @@
 <script src="{% static 'script.js' %}"></script>
 
 <div class="admin"><a href="{% url 'admin:index' %}">管理</a></div>
-<h1 class="title"><a href="{% url 'faqsystem:home' %}">常見問題</a></h1>
+<h1 class="title"><a href="{% url 'faqsystem:home' %}">臺北市文山區戶政事務所公文常見問題查詢系統</a></h1>
 
 <form class="search-bar" method="GET" action="{% url 'faqsystem:home' %}">
 	<input type="text" name="query" value="{{ request.GET.query }}">
