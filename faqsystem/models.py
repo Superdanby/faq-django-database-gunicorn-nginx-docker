@@ -15,7 +15,7 @@ class NonStrippingTextField(models.TextField):
 class FAQ(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.SET_NULL)
     question_text = models.CharField(max_length=10000)
-    answer_text = NonStrippingTextField()
+    answer_text = NonStrippingTextField(blank=True)
     clicks = models.BigIntegerField(default=0)
 
     def __str__(self):

@@ -22,7 +22,9 @@
                 <input type="submit" name="faq_id" value="{{ faq.id }}">
             </form>
             <div class="question" onclick="show({{ forloop.counter }}); update({{ forloop.counter }})">{{ faq.question_text|urlize }}<span class="author">{{ faq.author }}</span><span class="clicks" id="clicks-{{ forloop.counter }}">{{faq.clicks}}<i class="material-icons md-14">search</i></span></div>
+            {% if faq.answer_text %}
             <div class="answer">{{ faq.answer_text|urlize }}</div>
+            {% endif %}
             {% if faq.images_set.all %}
             {% for image in faq.images_set.all %}
             <img class="ansimg" src="{{ image.img.url }}" />
