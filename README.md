@@ -38,7 +38,7 @@ Update to the newest version requires rebuilding the images:
 
 | Variable | Default value | Description | Containers using the variable |
 | -------- | ------------- | ----------- | ------------------- |
-| `DB_TYPE` | '' | Supported values are `mariadb`(`mysql`), `postgres`(`postgresql`), should be specified even in development | `web` |
+| `DB_TYPE` |  | Supported values are `mariadb`(`mysql`), `postgres`(`postgresql`), should be specified even in development | `web` |
 | `DEBUG` | `0` | Production: `0` / Development: `1` | `web` |
 | `SECRET_KEY` | `yaaaaaaaaaaaaa!` | Change this to a hard-to-guess random string | `web` |
 | `DJANGO_ALLOWED_HOSTS` | `localhost 127.0.0.1 [::1]` | the IPs/domain names that this Django site can be served | `web` |
@@ -46,7 +46,8 @@ Update to the newest version requires rebuilding the images:
 | `DJANGO_SUPER_PASSWORD` | `yaaaaaaaaaaaaa!` | Default admin page password | `web` |
 | `DJANGO_SUPER_EMAIL` |  `yaaaaa@yaaa.yaa` | Email of the admin user | `web` |
 | `HOST` | `db` | Domain name or IP of the database, use `127.0.0.1` instead of `localhost` in development | `web` |
-| `PORT` | `` | Port of the database(`postgres`: `5432`, `mariadb`: `3306`) | `web` |
+| `PORT` |  | Port of the database(`postgres`: `5432`, `mariadb`: `3306`) | `web` |
+| `TIME_ZONE` | `Asia/Taipei` | timezone for the website, valid options are listed [here](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) | `web` |
 | `MYSQL_ROOT_PASSWORD` | `yaaaaaaaaaaaaa!` | Mariadb `root` password | `web` & `db` |
 | `MYSQL_DATABASE` | `faqs` | Mysql default database | `web` & `db` |
 | `POSTGRES_USER` | `yaaaaaaaaaaaaa!` | Postgres super account username | `web` & `db` |
