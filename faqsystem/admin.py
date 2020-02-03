@@ -1,8 +1,9 @@
 from django.contrib import admin
 from django.contrib import messages
+from django.utils.timezone import now
 
 # Register your models here.
-from .models import FAQ, Images, Files
+from .models import FAQ, Images, Files, Feedback
 
 class ImagesInline(admin.StackedInline):
     model = Images
@@ -53,4 +54,14 @@ class FAQAdmin(admin.ModelAdmin):
             messages.error(request, obj.question_text + " created by " + obj.author.get_username() + ". Only the author can edit or delete it.")
 
 
+class FeedbackAdmin(admin.ModelAdmin):
+    list_display = ('feedback', 'feedback_date', 'reply_date', 'author')
+    readonly_fields = ['author', 'feedback']
+    ordering = ['reply_date', 'feedback_date']
+
+    def save_model(self, request, obj, form, change):
+        obj.reply_date = now()
+        super().save_model(request, obj, form, change)
+
 admin.site.register(FAQ, FAQAdmin)
+admin.site.register(Feedback, FeedbackAdmin)

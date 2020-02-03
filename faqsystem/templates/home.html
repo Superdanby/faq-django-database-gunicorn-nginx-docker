@@ -6,6 +6,7 @@
 <script src="{% static 'script.js' %}"></script>
 
 <div class="admin"><a href="{% url 'admin:index' %}">管理</a></div>
+<div class="feedback"><a href="{% url 'faqsystem:feedback' %}">提問 & 回饋</a></div>
 <h1 class="title"><a href="{% url 'faqsystem:home' %}">臺北市文山區戶政事務所公文常見問題查詢系統</a></h1>
 
 <form class="search-bar" method="GET" action="{% url 'faqsystem:home' %}">

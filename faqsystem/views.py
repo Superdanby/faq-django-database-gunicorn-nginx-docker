@@ -3,10 +3,11 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
+from django.contrib import messages
 from django.contrib.postgres.search import SearchVector, TrigramSimilarity
 from django.db.models.functions import Greatest
 from functools import partial
-from .models import FAQ, Images
+from .models import FAQ, Images, Feedback
 
 import multiprocessing as mp
 
@@ -35,7 +36,6 @@ class FAQView(generic.ListView):
     context_object_name = 'faq_list'
 
     def get_queryset(self):
-        """Return the last five published questions."""
         query = self.request.GET.get('query')
         if query is not None and query is not '':
             listed = list(FAQ.objects.all())
@@ -62,3 +62,21 @@ class FAQView(generic.ListView):
             faq.clicks -= 1
             faq.save()
         return HttpResponse(faq.clicks)
+
+
+class FeedbackView(generic.ListView):
+    template_name = 'feedback.html'
+    context_object_name = 'feedback_list'
+
+    def get_queryset(self):
+        return Feedback.objects.order_by('-feedback_date')
+
+    def post(self, request, *args, **kwargs):
+        if request.POST['name'] and request.POST['feedback']:
+            feedback = Feedback()
+            feedback.author = request.POST['name']
+            feedback.feedback = request.POST['feedback']
+            feedback.save()
+        else:
+            messages.error(request, 'Value error!')
+        return HttpResponseRedirect(reverse('faqsystem:feedback'))

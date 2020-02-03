@@ -23,6 +23,21 @@ body {
     color: #778899;
 }
 
+.feedback {
+    position: absolute;
+    left: 0;
+}
+
+.feedback > a {
+    background: #fffadd;
+    border: none;
+    cursor: pointer;
+    padding:1vw 2vw;
+    text-align: center;
+    text-decoration: none;
+    color: #778899;
+}
+
 .title {
     text-align: center;
 }
@@ -38,23 +53,38 @@ body {
 
 input[type=text] {
     width: 30%;
-    padding:5px;
-    border:2px solid #ccc;
+    padding: 5px;
+    border: 2px solid #ccc;
     -webkit-border-radius: 5px;
     border-radius: 5px;
 }
 
 input[type=text]:focus {
-    border-color:#333;
+    border-color: #333;
 }
 
 input[type=submit] {
-    padding:5px 15px;
-    background:#ccc;
-    border:0 none;
-    cursor:pointer;
+    padding: 5px 15px;
+    background: #ccc;
+    border: 0 none;
+    cursor: pointer;
     -webkit-border-radius: 5px;
     border-radius: 5px;
+}
+
+textarea {
+    width: 50%;
+    height: auto;
+    vertical-align: text-top;
+    padding: 5px;
+    border: 2px solid #ccc;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.feedback-form {
+    background: honeydew;
+    text-align: center;
 }
 
 .flex-container {

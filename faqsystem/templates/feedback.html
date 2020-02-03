@@ -1,0 +1,44 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% load static %}
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+<script src="{% static 'script.js' %}"></script>
+
+<div class="admin"><a href="{% url 'admin:index' %}">管理</a></div>
+<div class="feedback"><a href="{% url 'faqsystem:home' %}">首頁</a></div>
+<h1 class="title"><a href="{% url 'faqsystem:feedback' %}">提問 & 回饋</a></h1>
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <div{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<div class="feedback-form">
+    <form action="{% url 'faqsystem:feedback' %}" method="post" style="padding: 10px; margin-bottom: 0;">
+        {% csrf_token %}
+        <label for="name">名字</label>
+        <input type="text" id="name" name="name"></input>
+        <br/>
+        <br/>
+        <label for="feedback">內容</label>
+        <textarea id="feedback" name="feedback" rows="10"></textarea>
+        <br/>
+        <br/>
+        <input type="submit" value="送出"/>
+    </form>
+</div>
+<div style="background: #f8fff0; padding: 10px;"></div>
+<div class="flex-container" style="background: ivory;">
+    {% for feedback in feedback_list %}
+        <div class="entry" id="{{ forloop.counter }}">
+            <div class="question" onclick="show({{ forloop.counter }}); update({{ forloop.counter }})">{{ feedback.feedback|urlize }}<span class="author">{{ feedback.author }}</span><span class="clicks" id="clicks-{{ forloop.counter }}">{{ feedback.feedback_date }}<i class="material-icons md-14">calendar_today</i></span></div>
+            {% if feedback.reply %}
+            <div class="answer">{{ feedback.reply|urlize }}</div>
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>

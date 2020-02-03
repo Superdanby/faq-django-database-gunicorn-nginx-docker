@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.utils.timezone import now
 
 import os
 
@@ -39,3 +40,14 @@ class Files(models.Model):
 
     def filename(self):
         return os.path.basename(self.f.name)
+
+
+class Feedback(models.Model):
+    author = models.CharField(max_length=100)
+    feedback = NonStrippingTextField()
+    feedback_date = models.DateTimeField(default=now, editable=False)
+    reply = NonStrippingTextField(blank=True)
+    reply_date = models.DateTimeField(null=True, editable=False)
+
+    def __str__(self):
+        return self.feedback
