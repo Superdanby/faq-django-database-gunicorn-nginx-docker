@@ -51,3 +51,22 @@ class Feedback(models.Model):
 
     def __str__(self):
         return self.feedback
+
+
+class ReplyImages(models.Model):
+    faq = models.ForeignKey(Feedback, on_delete=models.CASCADE)
+    img = models.ImageField(upload_to='reply/images')
+
+    def __str__(self):
+        return self.img.url
+
+
+class ReplyFiles(models.Model):
+    faq = models.ForeignKey(Feedback, on_delete=models.CASCADE)
+    f = models.FileField(upload_to='reply/files')
+
+    def __str__(self):
+        return self.f.url
+
+    def filename(self):
+        return os.path.basename(self.f.name)

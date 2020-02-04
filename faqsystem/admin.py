@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.utils.timezone import now
 
 # Register your models here.
-from .models import FAQ, Images, Files, Feedback
+from .models import FAQ, Images, Files, Feedback, ReplyImages, ReplyFiles
 
 class ImagesInline(admin.StackedInline):
     model = Images
@@ -54,7 +54,18 @@ class FAQAdmin(admin.ModelAdmin):
             messages.error(request, obj.question_text + " created by " + obj.author.get_username() + ". Only the author can edit or delete it.")
 
 
+class ReplyImagesInline(admin.StackedInline):
+    model = ReplyImages
+    extra = 1
+
+
+class ReplyFilesInline(admin.StackedInline):
+    model = ReplyFiles
+    extra = 1
+
+
 class FeedbackAdmin(admin.ModelAdmin):
+    inlines = [ReplyImagesInline, ReplyFilesInline]
     list_display = ('feedback', 'feedback_date', 'reply_date', 'author')
     readonly_fields = ['author', 'feedback']
     ordering = ['reply_date', 'feedback_date']

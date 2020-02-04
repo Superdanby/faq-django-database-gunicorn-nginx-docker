@@ -39,6 +39,16 @@
             {% if feedback.reply %}
             <div class="answer">{{ feedback.reply|urlize }}</div>
             {% endif %}
+            {% if feedback.replyimages_set.all %}
+            {% for image in feedback.replyimages_set.all %}
+            <img class="ansimg" src="{{ image.img.url }}" />
+            {% endfor %}
+            {% endif %}
+            {% if feedback.replyfiles_set.all %}
+            {% for file in feedback.replyfiles_set.all %}
+            <a class="ansfile" href="{{ file.f.url }}" target="_blank">{{ file.filename }}</a>
+            {% endfor %}
+            {% endif %}
         </div>
     {% endfor %}
 </div>
