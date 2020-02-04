@@ -8,10 +8,11 @@ services:
       dockerfile: dockerfile
     restart: always
     working_dir: /faq-django-database-gunicorn-nginx-docker
-    command: bash -c "python3 manage.py makemigrations && python3 manage.py migrate && cat .createsuperuser | envsubst | python3 manage.py shell && python3 manage.py collectstatic --no-input && gunicorn faq.wsgi -b 0.0.0.0:8181"
+    command: bash -c "touch /faq-django-database-gunicorn-nginx-docker/faqsystem/migrations/__init__.py && python3 manage.py makemigrations && python3 manage.py migrate && cat .createsuperuser | envsubst | python3 manage.py shell && python3 manage.py collectstatic --no-input && gunicorn faq.wsgi -b 0.0.0.0:8181"
     volumes:
       - ./data/media:/media
       - ./data/static:/static
+      - ./data/migrations:/faq-django-database-gunicorn-nginx-docker/faqsystem/migrations
     env_file:
         - .env
     depends_on:
