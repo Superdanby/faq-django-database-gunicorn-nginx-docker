@@ -103,6 +103,7 @@ textarea {
 }
 
 .question {
+    background-color: inherit;
     cursor: pointer;
     padding: 0.5vw;
     font-size: 24px;
@@ -120,7 +121,7 @@ textarea {
     position: absolute;
     font-size: 14px;
     color: darkseagreen;
-    background-color: aliceblue;
+    background-color: inherit;
     top: 0;
     right: 0.5vw;
 }
@@ -130,7 +131,7 @@ textarea {
     position: absolute;
     font-size: 14px;
     color: burlywood;
-    background-color: aliceblue;
+    background-color: inherit;
     bottom: 0;
     right: 0.25vw;
 }
@@ -140,6 +141,10 @@ textarea {
     -moz-transition: opacity 0.5s ease-in;
     -o-transition: opacity 0.5s ease-in;
     opacity: 1;
+}
+
+.entry.topped {
+    background-color: lavender;
 }
 
 .clicks-form {

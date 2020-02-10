@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.contrib.postgres.search import SearchVector, TrigramSimilarity
 from django.db.models.functions import Greatest
 from functools import partial
+from django.db.models import F
 from .models import FAQ, Images, Feedback
 
 import multiprocessing as mp
@@ -52,7 +53,7 @@ class FAQView(generic.ListView):
             #     TrigramSimilarity('answer_text', query)
             # )).filter(similarity__gte=0.1).order_by('-similarity')
 
-        return FAQ.objects.order_by('-clicks')
+        return FAQ.objects.order_by(F('topped').asc(nulls_last=True), '-clicks')
 
     def post(self, request, *args, **kwargs):
         faq = get_object_or_404(FAQ, pk=request.POST['faq_id'])

@@ -17,7 +17,7 @@
 {% if faq_list %}
 <div class="flex-container">
     {% for faq in faq_list %}
-        <div class="entry" id="{{ forloop.counter }}">
+        <div class="entry {% if faq.topped %}topped{% endif %}" id="{{ forloop.counter }}">
             <form action="{% url 'faqsystem:home' %}" class="clicks-form" id="clicks-form-{{ forloop.counter }}" method="post">
             {% csrf_token %}
                 <input type="submit" name="faq_id" value="{{ faq.id }}">

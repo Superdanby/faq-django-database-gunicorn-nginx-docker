@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib import messages
 from django.utils.timezone import now
+from django.db.models import F
 
 # Register your models here.
 from .models import FAQ, Images, Files, Feedback, ReplyImages, ReplyFiles
@@ -18,7 +19,8 @@ class FilesInline(admin.StackedInline):
 class FAQAdmin(admin.ModelAdmin):
     inlines = [ImagesInline, FilesInline]
     exclude = ['author', 'clicks']
-    list_display = ('question_text', 'answer_text', 'author')
+    list_display = ('question_text', 'answer_text', 'author', 'topped', 'clicks')
+    ordering = [F('topped').asc(nulls_last=True), '-clicks']
 
     def delete_queryset(self, request, queryset):
         for obj in queryset:

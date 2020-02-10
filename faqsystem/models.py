@@ -18,6 +18,7 @@ class FAQ(models.Model):
     question_text = models.CharField(max_length=10000)
     answer_text = NonStrippingTextField(blank=True)
     clicks = models.BigIntegerField(default=0)
+    topped = models.BigIntegerField(null=True)
 
     def __str__(self):
         return self.question_text + self.answer_text
